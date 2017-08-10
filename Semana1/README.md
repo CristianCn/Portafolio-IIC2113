@@ -1,69 +1,80 @@
-# Repositorio Tarea 1
+# Portafolio Semana 1
 
-##Integrantes:
-
-###Ignacio Urzua
-
-###Cristian Carreño
-
-Para usar el scheduler se debe hacer make desde la carpeta del repositorio y ejecutarlo como se indica `./simulator <scheduler> <file> <quantum>``
-
-# Explicación de los algoritmos:
-
-##FCFS:
-
-* El algoritmo FCFS se creó con una cola de procesos representada con el struct
-`Queue` que se fue llenando al inicio del programa con los datos que se recaban
-del archivo .txt que se lee, luego de esto los procesos se ordenan en la cola
-según el tiempo de llegada a la CPU (i.e. cuando se crean los procesos), el
-scheduler está representado con un loop infinito que tiene como condicion de
-término una variable global que vale 1 o 0. Los procesos se mantiene en la cola
-en todo momento y solo cambian de estado, los que son: WAITING, READY, RUNNING y
-DEAD (estado añadido por simplicidad). Cuando los procesos entran a estado
-WAITING son añadidos a una cola creada con el struct WaitList que representa una
-lista doblemente ligada para almacenar los procesos en estado waiting, cuando un
-proceso pasa a este estado se añade y cuando queda READY se elimina de la cola.
-El algoritmo básicamente va añadiendo un tiempo en cada loop y revisa la cola
-waiting para bajarle el tiempo de espera a estos procesos y eventualmente cambiarlos
-a estado READY, luego de esto se hace un loop de todos los procesos de la cola `Queue`
-para ver que proceso escoger y poner en funcionamiento (estado RUNNING), luego de esto se rebajan los tiempos correspondientes de los procesos, los procesos se recorren en orden en la cola `Queue` y si se encuentra con un proceso READY (si es que la CPU esta libre) lo coloca en funcionamiento, cumpliendo lo indicado por los algoritmos FCFS.
-La condicion de termino del loop es cuando todos los procesos se hayan terminado de ejecutar o cuando se desencadena la señal `CTRL + C` que se atrapa y cambia la condición de término del loop infinito por lo que éste para y se imprimen las estadísticas correspondientes.
-
-##RANDOM:
-
-* El algoritmo Random funciona de forma equivalente al FCFS, con el único cambio que no se revisa secuencialmente la cola `Queue`de procesos sino que se hace un random que va desde 1 al largo de la cola para escoger cual proceso entrará a la CPU, este random se da en un loop hasta que encuentre un proceso en estado READY y que haya llegado. El funcionamiento de las colas es igual al FCFS y posee las mismas condiciones de término.
+## Cristian Carreño
 
 
-##ROUND ROBIN:
+Si se quiere probar el código se debe hacer make desde la carpeta Semana1 y ejecutarlo de la siguiente forma `./simulator <scheduler> <file> <quantum>`
+
+# Explicación del código:
+
+El código presentado es una tarea que realicé con un compañero para el curso IIC2333 - Sistemas Operativos y Redes, el objetivo de la tarea era realizar una simulación de un scheduler de procesos utilizando tres algoritmos:
+
+1. * FCFS
+
+2. * Round-Robin
+
+3. * Random
 
 
-* El algoritmo utiliza las mismas estructuras que FCFS y RANDOM. Este algoritmo se compone de un While que funcionará hasta que hayan dejado de ejecutarse todos los procesos o hasta que se pulse `CTRL + C` en la consola. En cada iteración del While, se recorren en orden según su tiempo de llegada todos los procesos, y se trata de que siguiendo el orden ejecute cada uno de los proceso su quantum correspondiente de tiempos.
+# ¿Por qué se escogió el código?
 
-* Si en esta revisión un proceso está en estado READY y el tiempo de llegada es menor o igual al tiempo actual, el proceso pasa a estado RUNNING y utilizará un máximo de quantum, que es determinado según su prioridad, veces la cpu (puede ser menos dependiendo del valor de A_i).
+Escogí este código pues en mi opinión es un código que tiene una calidad pobre. Al entregarlo ya estabamos al tanto de esto, pero cumplía funcionalmente el objetivo requerido para la tarea. En este código es fácil evidenciar problemas de calidad que se podrían catalogar como universalmente aceptados como: repetición de código, mal uso de nombre de variables, código comentado sin utilizar y otros que se revisarán a continuación.
 
-* En cada ejecución en la CPU pueden pasar diversas cosas con cada proceso (en cada momento va aumentando el tiempo en 1):
 
-    * Puede morir el proceso (cuando se ejecutó cumpliendo la secuencia de A y B), con nuevo estado DEAD
-    * Puede pasar a estado WAITING (cuando termino la subsecuencia A_i)
-    * Puede seguir en estado READY al tener un quantum menor al A_i y entregar la CPU (guardando el tiempo en el que se detuvo)
-    * Puede ejecutar un tiempo más el proceso
+# Calidad de código
 
-* La función revisa en cada iteración si es que se detecta la señal enviada al pulsar `CTRL + C`, y si es que es así manda a imprimir todas las estadísticas que se tengan recabadas hasta ese momento.
+Es difícil establecer qué se entiende por código de calidad, pues surgen inmediatamente muchas preguntas, como por ejemplo:
+1. * ¿Si el código cumple la funcionalidad y el tiempo es acotado, vale la pena crear un código reutilizable o de gran calidad?
+2. * ¿El código debe ser corto y eficiente o de mayor extensión y de fácil lectura?
+3. * ¿Las normas "universalmente aceptadas" deben ser un axioma al programar o se puede programar con buena calidad siguiendo principios que nos acomodan de forma personal?
+4. * ¿Cómo definimos los pesos de las distintas partes de un código al establecer si es de buena calidad? Por ejemplo, si es más importante tener código rápido o más lento pero de fácil comprensión.
+5. * Etc.
 
-* Para modelar se utilizaron las mismas estructuras descritas anteriormente, revisando periódicamente la cola Wait para cambiar los procesos a READY cuando corresponda, manejando bien la cola de procesos y utilizando diversas funciones auxiliares para ordenar la función.
+Como la calidad de código no es un tema de opinión unánime, se discutirá el código en solo algunos puntos que a mi parecer resultan intuitivamente malas prácticas.
 
-#SUPUESTOS:
+# Discusión y análisis del código presentado
 
-1. * El proceso Idle no se presenta como un proceso ejecutandose pues no hace nada por lo tanto hay posibilidad de que se muestre en consola solo el tiempo, es ahí donde no hay procesos en ejecución (en CPU) y ahí actúa el Idle.
+El código presentado es una tarea que presenta un código deficiente en términos de calidad en varios aspectos, los que se detallan a continuación:
 
-2. * Como se dijo en ayudantía tenemos el numero de procesos al leer el archivo por eso creamos colas de tamaño fijo (el número de procesos).
+1. * El código es desordenado y no existe una modularidad clara: Podemos ver en el archivo `Tarea1.c`que existen diversas funciones, las que representan la mayor parte del archivo pero están mezcladas con el código main principal, que puede verse desde la línea `660`, esto dificulta la lectura y entendimiento del código. Además hace que el código a la larga no sea mantenible ya que si se siguiera programando en este estilo se terminaría con un código de muchas líneas en un mismo archivo, lo que hace que el debuggeo sea muy difícil de realizar y sea complejo entender el código para terceros.
 
-3. * El Response Time se tomó como el tiempo en que llega un proceso a la CPU - el tiempo en que se ejecuta en CPU por primera vez.
+Podemos ver que la siguiente función: ```c
+void erase_node(Nodo *nodo, WaitList *lista) {
 
-4. * El Turnaround Time se consideró como tiempo en que muere el proceso - tiempo en que entra a CPU por primera vez.
+  if (nodo->prev == NULL && nodo->next == NULL) {
+    lista->inicio = NULL;
+    lista->fin = NULL;
+    lista->largo --;
 
-5. * Las veces que se bloqueo son la cantidad de veces que pasa de Running a Waiting.
+  }
+  ``` está en el mismo archivo que la función `main`, pero `erase_node` es solo una función auxiliar por lo que no debería estar en el archivo principal.
 
-6. * Por simplicidad se inician los procesos en READY pero no se ejecutan si no han llegado.
+2. * En los archivos no se utiliza consistentemente un solo idioma para desarrollar, por ejemplo podemos ver el método ```c
+void erase_node(Nodo *nodo, WaitList *lista) {
 
-7. * El output que dice cuantos tiempos le quedan a un proceso corresponden a la suma de todos los A y B (subsecuencias) que aún no ejecuta.
+  if (nodo->prev == NULL && nodo->next == NULL) {
+    lista->inicio = NULL;
+    lista->fin = NULL;
+    lista->largo --;
+
+  }
+  ```
+  con un nombre en ingles pero con variables en español. Esto dificulta la lectura del código al no mantener un estándar.
+
+3. * Existe repetición de código: Como se puede ver, la función `roundrobin` y `fcfs` poseen estructuras muy similares, las que podrían haber sido modeladas como métodos para poder reutilizarse, de forma de ordenar el código y seguir el prinipio DRY, lo que claramente no se utilizó en esta tarea.
+
+4. * En el archivo `Tarea1.c` existe gran cantidad de código comentado que no tiene ningún uso, solamente ensucia el código general. Esto quita claridad al leer el archivo. Además de esto no se respeta una formato a lo largo del archivo, es decir espacios después de definición de métodos o saltos de línea entre funciones lo que también quita claridad al código. Esto se puede ver a continuación ```c
+if (proceso_actual->tiempo_restante == 0 && //linea 272
+  proceso_actual->subsequencia < proceso_actual->n * 2 -1 - 1) {
+    //printf("Se le acaba el tiempo en CPU a: %s, tiempo restante es cero\n", proceso_actual->nombre);
+    proceso_actual->subsequencia ++;
+    proceso_actual->tiempo_restante = proceso_actual->array[proceso_actual->subsequencia];
+    proceso_actual->estado = "WAITING";
+    //printf("Tiempo de waiting del proceso: %s es %d\n", proceso_actual->nombre,proceso_actual->tiempo_restante );
+    //puts("--------------- Entra el proceso a waiting  ------------------------");
+    //printf("|    - - - - - - -     Proceso %s a estado WAITING    - - - - - - -    |\n\n", proceso_actual->nombre);
+    printf("Se le acaba el tiempo en CPU al proceso:%s, entra a estado WAITING\n", proceso_actual->nombre);
+    proceso_actual->tiempo_stop=0;
+```
+
+5. * No existen comentarios útiles que ayuden a terceros a entender el código, uno se enfrenta a un código de mala calidad y formato sin comentarios en lenguaje natural para guiar el entendimiento.

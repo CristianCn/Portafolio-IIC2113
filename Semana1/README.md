@@ -5,7 +5,7 @@
 
 Si se quiere probar el código se debe hacer make desde la carpeta Semana1 y ejecutarlo de la siguiente forma `./simulator <scheduler> <file> <quantum>`
 
-# Explicación del código:
+## Explicación del código:
 
 El código presentado es una tarea que realicé con un compañero para el curso IIC2333 - Sistemas Operativos y Redes, el objetivo de la tarea era realizar una simulación de un scheduler de procesos utilizando tres algoritmos:
 
@@ -16,29 +16,31 @@ El código presentado es una tarea que realicé con un compañero para el curso 
 3. * Random
 
 
-# ¿Por qué se escogió el código?
+## ¿Por qué se escogió el código?
 
 Escogí este código pues en mi opinión es un código que tiene una calidad pobre. Al entregarlo ya estabamos al tanto de esto, pero cumplía funcionalmente el objetivo requerido para la tarea. En este código es fácil evidenciar problemas de calidad que se podrían catalogar como universalmente aceptados como: repetición de código, mal uso de nombre de variables, código comentado sin utilizar y otros que se revisarán a continuación.
 
 
-# Calidad de código
+## Calidad de código
 
 Es difícil establecer qué se entiende por código de calidad, pues surgen inmediatamente muchas preguntas, como por ejemplo:
-1. * ¿Si el código cumple la funcionalidad y el tiempo es acotado, vale la pena crear un código reutilizable o de gran calidad?
-2. * ¿El código debe ser corto y eficiente o de mayor extensión y de fácil lectura?
-3. * ¿Las normas "universalmente aceptadas" deben ser un axioma al programar o se puede programar con buena calidad siguiendo principios que nos acomodan de forma personal?
-4. * ¿Cómo definimos los pesos de las distintas partes de un código al establecer si es de buena calidad? Por ejemplo, si es más importante tener código rápido o más lento pero de fácil comprensión.
-5. * Etc.
+* ¿Si el código cumple la funcionalidad y el tiempo es acotado, vale la pena crear un código reutilizable o de gran calidad?
+* ¿El código debe ser corto y eficiente o de mayor extensión y de fácil lectura?
+* ¿Las normas "universalmente aceptadas" deben ser un axioma al programar o se puede programar con buena calidad siguiendo principios que nos acomodan de forma personal?
+* ¿Cómo definimos los pesos de las distintas partes de un código al establecer si es de buena calidad? Por ejemplo, si es más importante tener código rápido o más lento pero de fácil comprensión.
+* Etc.
 
 Como la calidad de código no es un tema de opinión unánime, se discutirá el código en solo algunos puntos que a mi parecer resultan intuitivamente malas prácticas.
 
-# Discusión y análisis del código presentado
+## Discusión y análisis del código presentado
 
 El código presentado es una tarea que presenta un código deficiente en términos de calidad en varios aspectos, los que se detallan a continuación:
 
-1. * El código es desordenado y no existe una modularidad clara: Podemos ver en el archivo `Tarea1.c`que existen diversas funciones, las que representan la mayor parte del archivo pero están mezcladas con el código main principal, que puede verse desde la línea `660`, esto dificulta la lectura y entendimiento del código. Además hace que el código a la larga no sea mantenible ya que si se siguiera programando en este estilo se terminaría con un código de muchas líneas en un mismo archivo, lo que hace que el debuggeo sea muy difícil de realizar y sea complejo entender el código para terceros.
+1. El código es desordenado y no existe una modularidad clara:
 
-Podemos ver que la siguiente función:
+Podemos ver en el archivo `Tarea1.c`que existen diversas funciones, las que representan la mayor parte del archivo pero están mezcladas con el código main principal, que puede verse desde la línea `660`, esto dificulta la lectura y entendimiento del código. Además hace que el código a la larga no sea mantenible ya que si se siguiera programando en este estilo se terminaría con un código de muchas líneas en un mismo archivo, lo que hace que el debuggeo sea muy difícil de realizar y sea complejo entender el código para terceros.
+
+La función erase_node mostrada a continuación:
 
  ```c
 void erase_node(Nodo *nodo, WaitList *lista) {
@@ -49,24 +51,67 @@ void erase_node(Nodo *nodo, WaitList *lista) {
     lista->largo --;
 
   }
-  ```
-  está en el mismo archivo que la función `main`, pero `erase_node` es solo una función auxiliar por lo que no debería estar en el archivo principal.
+```
+está en el mismo archivo que la función `main`, pero `erase_node` es solo una función auxiliar por lo que no debería estar en el archivo principal, esto hace que se mezclen responsabilidades en un mismo archivo.
 
-2. * En los archivos no se utiliza consistentemente un solo idioma para desarrollar, por ejemplo podemos ver el método
+2. En los archivos no se utiliza consistentemente un solo idioma para desarrollar:
+
+por ejemplo la función InsertAtTail:
 
 ```c
-void erase_node(Nodo *nodo, WaitList *lista) {
+void InsertAtTail(WaitList *lista, Process *proceso) {
+	Nodo *newNode = GetNewNode(proceso);
 
-  if (nodo->prev == NULL && nodo->next == NULL) {
-    lista->inicio = NULL;
-    lista->fin = NULL;
-    lista->largo --;
+  /*Caso de lista vacia*/
+  if (lista ->fin == NULL && lista ->inicio == NULL) {
+    newNode->prev = lista->inicio;
+    newNode->next = lista->fin;
+    lista->inicio = newNode;
+    lista->fin = newNode;
+    lista->largo++;
 
   }
-```
-  con un nombre en ingles pero con variables en español. Esto dificulta la lectura del código al no mantener un estándar.
+  else{
+    newNode->prev = lista->fin;
 
-3. * Existe repetición de código: Como se puede ver, la función `roundrobin` y `fcfs` poseen estructuras muy similares, las que podrían haber sido modeladas como métodos para poder reutilizarse, de forma de ordenar el código y seguir el prinipio DRY, lo que claramente no se utilizó en esta tarea.
+    newNode->next = NULL;
+    lista->fin->next = newNode;
+    lista->fin = newNode;
+    lista->largo++;}
+
+
+}
+```
+posee un nombre en inglés, pero las variables utilizadas al interior de esta están algunas en español y otras en inglés. Esto dificulta la lectura del código para un tercero pues no existe un estándar en el lenguaje natural utilizado.
+
+3. * Existe repetición de código: Como se puede ver, la función `Random` y `fcfs` poseen estructuras muy similares y hay repetición del mismo código, esto podría haber sido modelado como un método para poder reutilizarse, de forma de ordenar el código y seguir el prinipio DRY (Don't repeat yourself), lo que claramente no se utilizó en esta tarea.
+
+A continuación se muestra un fragmento de código que se reutiliza en ambas funciones:
+
+```c
+if (cola_wait->largo != 0) {
+
+  Nodo *actual = cola_wait->inicio;
+  //puts("efrain");
+  for (int i = 0; i < cola_wait->largo; i++) {//revisa los wait y actualiza los tiempos
+    //puts("efrain 2");
+
+    if (actual->proceso->tiempo_restante == 0) { // cero a 1
+
+
+      actual->proceso->estado = "READY";
+      printf("El proceso %s pasa a estado READY\n",actual->proceso->nombre );
+
+      actual->proceso->subsequencia++;
+
+      actual->proceso->tiempo_restante = actual->proceso->array[actual->proceso->subsequencia];
+
+      erase_node(actual, cola_wait);
+      i--;
+
+    }
+```
+este trozo se ocupa desde la línea 363 en la función `fcfs` y desde la línea 512 en la función `RandomScheduler`. Con esto se añade código innecesario "ensuciando" el código y haciendolo más extenso de forma innecesaria.
 
 4. * En el archivo `Tarea1.c` existe gran cantidad de código comentado que no tiene ningún uso, solamente ensucia el código general. Esto quita claridad al leer el archivo. Además de esto no se respeta una formato a lo largo del archivo, es decir espacios después de definición de métodos o saltos de línea entre funciones lo que también quita claridad al código. Esto se puede ver a continuación
 

@@ -3,7 +3,7 @@
 ## Cristian Carreño
 
 
-Si se quiere probar el código se debe hacer make desde la carpeta Semana1 y ejecutarlo de la siguiente forma `./simulator <scheduler> <file> <quantum>`
+Si se quiere probar el código se debe hacer make desde la carpeta Semana1 y ejecutarlo de la siguiente forma `./simulator <scheduler> <file> <quantum>`, los archivos `Tarea1.c` y `Tarea1.h`solo se incluyen como referencia del código completo, pero la crítica se hace a trozos de esté código que se presentan el siguiente README.md.
 
 ## Explicación del código:
 
@@ -38,7 +38,7 @@ El código presentado es una tarea que presenta un código deficiente en términ
 
 * ### El código es desordenado y no existe una modularidad clara:
 
-Podemos ver en el archivo `Tarea1.c`que existen diversas funciones, las que representan la mayor parte del archivo pero están mezcladas con el código main principal, que puede verse desde la línea `660`, esto dificulta la lectura y entendimiento del código. Además hace que el código a la larga no sea mantenible ya que si se siguiera programando en este estilo se terminaría con un código de muchas líneas en un mismo archivo, lo que hace que el debuggeo sea muy difícil de realizar y sea complejo entender el código para terceros.
+Podemos ver en el archivo `Tarea1.c` que existen diversas funciones, las que representan la mayor parte del archivo pero están mezcladas con el código main principal, que puede verse desde la línea `660`, esto dificulta la lectura y entendimiento del código. Además hace que el código a la larga no sea mantenible, si se continúa programando de esta forma se tendría un solo archivo gigante sin un hilo conductor coherente. Esto hace que el debuggeo sea muy difícil de realizar y sea complejo entender el código por terceros.
 
 La función erase_node mostrada a continuación:
 
@@ -52,7 +52,7 @@ void erase_node(Nodo *nodo, WaitList *lista) {
 
   }
 ```
-está en el mismo archivo que la función `main`, pero `erase_node` es solo una función auxiliar por lo que no debería estar en el archivo principal, esto hace que se mezclen responsabilidades en un mismo archivo.
+está en el mismo archivo que la función `main`, pero `erase_node` es solo una función auxiliar, por lo que no debería estar en el archivo principal, esto hace que se mezclen responsabilidades en un mismo archivo.
 
 * ### En los archivos no se utiliza consistentemente un solo idioma para desarrollar:
 
@@ -82,7 +82,7 @@ void InsertAtTail(WaitList *lista, Process *proceso) {
 
 }
 ```
-posee un nombre en inglés, pero las variables utilizadas al interior de esta están algunas en español y otras en inglés. Esto dificulta la lectura del código para un tercero pues no existe un estándar en el lenguaje natural utilizado.
+posee un nombre en inglés, pero las variables utilizadas al interior de esta están algunas en español y otras en inglés. Esto dificulta la lectura del código para un tercero, pues no existe un estándar en el lenguaje natural utilizado.
 
 * ### Repetición de código:
 Como se puede ver, la función `Random` y `fcfs` poseen estructuras muy similares y hay repetición del mismo código, esto podría haber sido modelado como un método para poder reutilizarse, de forma de ordenar el código y seguir el prinipio DRY (Don't repeat yourself), lo que claramente no se utilizó en esta tarea.
@@ -116,7 +116,7 @@ este trozo se ocupa desde la línea 363 en la función `fcfs` y desde la línea 
 
 * ### Código comentado sin utilizar:
 
-En el archivo `Tarea1.c` existe gran cantidad de código comentado que no tiene ningún uso, solamente ensucia el código general. Esto quita claridad al leer el archivo. Además de esto no se respeta una formato a lo largo del archivo, es decir espacios después de definición de métodos o saltos de línea entre funciones lo que también quita claridad al código. Esto se puede ver a continuación
+En el archivo `Tarea1.c` existe gran cantidad de código comentado que no tiene ningún uso, solamente ensucia el código general. Esto quita claridad al leer el archivo. Además de esto no se respeta una formato a lo largo del archivo, es decir espacios después de definición de métodos o saltos de línea entre funciones lo que también quita claridad al código. Esto se puede ver a continuación:
 
 ```c
 if (proceso_actual->tiempo_restante == 0 && //linea 272
@@ -135,3 +135,7 @@ if (proceso_actual->tiempo_restante == 0 && //linea 272
 * ### No existen comentarios útiles que ayuden a terceros a entender el código:
 
 Un tercero se enfrenta a un código de mala calidad y formato sin comentarios en lenguaje natural para guiar el entendimiento.
+
+## Conclusión:
+
+Me parece que el código mostrado posee un pésima calidad pero cumple los objetivos principales que se pedían en la tarea. Por temas de tiempo y carga académica muchas veces escribimos código siguiendo la metodología `code & fix sabiendo que es una mala práctica, pero se ocupa de igual forma pues se privilegia cumplir con los requisitos principales de las tareas y cumplir los deadlines. Hecho parecido que ocurre en la creación de software real al privilegiar el Time To Market en vez de la calidad del código, lo que claramente no es óptimo.

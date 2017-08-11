@@ -36,7 +36,7 @@ Como la calidad de código no es un tema de opinión unánime, se discutirá el 
 
 El código presentado es una tarea que presenta un código deficiente en términos de calidad en varios aspectos, los que se detallan a continuación:
 
-1. El código es desordenado y no existe una modularidad clara:
+* El código es desordenado y no existe una modularidad clara:
 
 Podemos ver en el archivo `Tarea1.c`que existen diversas funciones, las que representan la mayor parte del archivo pero están mezcladas con el código main principal, que puede verse desde la línea `660`, esto dificulta la lectura y entendimiento del código. Además hace que el código a la larga no sea mantenible ya que si se siguiera programando en este estilo se terminaría con un código de muchas líneas en un mismo archivo, lo que hace que el debuggeo sea muy difícil de realizar y sea complejo entender el código para terceros.
 
@@ -54,7 +54,7 @@ void erase_node(Nodo *nodo, WaitList *lista) {
 ```
 está en el mismo archivo que la función `main`, pero `erase_node` es solo una función auxiliar por lo que no debería estar en el archivo principal, esto hace que se mezclen responsabilidades en un mismo archivo.
 
-2. En los archivos no se utiliza consistentemente un solo idioma para desarrollar:
+* En los archivos no se utiliza consistentemente un solo idioma para desarrollar:
 
 por ejemplo la función InsertAtTail:
 
@@ -84,7 +84,7 @@ void InsertAtTail(WaitList *lista, Process *proceso) {
 ```
 posee un nombre en inglés, pero las variables utilizadas al interior de esta están algunas en español y otras en inglés. Esto dificulta la lectura del código para un tercero pues no existe un estándar en el lenguaje natural utilizado.
 
-3. * Existe repetición de código: Como se puede ver, la función `Random` y `fcfs` poseen estructuras muy similares y hay repetición del mismo código, esto podría haber sido modelado como un método para poder reutilizarse, de forma de ordenar el código y seguir el prinipio DRY (Don't repeat yourself), lo que claramente no se utilizó en esta tarea.
+* Existe repetición de código: Como se puede ver, la función `Random` y `fcfs` poseen estructuras muy similares y hay repetición del mismo código, esto podría haber sido modelado como un método para poder reutilizarse, de forma de ordenar el código y seguir el prinipio DRY (Don't repeat yourself), lo que claramente no se utilizó en esta tarea.
 
 A continuación se muestra un fragmento de código que se reutiliza en ambas funciones:
 
@@ -113,7 +113,7 @@ if (cola_wait->largo != 0) {
 ```
 este trozo se ocupa desde la línea 363 en la función `fcfs` y desde la línea 512 en la función `RandomScheduler`. Con esto se añade código innecesario "ensuciando" el código y haciendolo más extenso de forma innecesaria.
 
-4. * En el archivo `Tarea1.c` existe gran cantidad de código comentado que no tiene ningún uso, solamente ensucia el código general. Esto quita claridad al leer el archivo. Además de esto no se respeta una formato a lo largo del archivo, es decir espacios después de definición de métodos o saltos de línea entre funciones lo que también quita claridad al código. Esto se puede ver a continuación
+* En el archivo `Tarea1.c` existe gran cantidad de código comentado que no tiene ningún uso, solamente ensucia el código general. Esto quita claridad al leer el archivo. Además de esto no se respeta una formato a lo largo del archivo, es decir espacios después de definición de métodos o saltos de línea entre funciones lo que también quita claridad al código. Esto se puede ver a continuación
 
 ```c
 if (proceso_actual->tiempo_restante == 0 && //linea 272
@@ -129,4 +129,4 @@ if (proceso_actual->tiempo_restante == 0 && //linea 272
     proceso_actual->tiempo_stop=0;
 ```
 
-5. * No existen comentarios útiles que ayuden a terceros a entender el código, uno se enfrenta a un código de mala calidad y formato sin comentarios en lenguaje natural para guiar el entendimiento.
+* No existen comentarios útiles que ayuden a terceros a entender el código, uno se enfrenta a un código de mala calidad y formato sin comentarios en lenguaje natural para guiar el entendimiento.

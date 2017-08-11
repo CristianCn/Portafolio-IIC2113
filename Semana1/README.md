@@ -84,7 +84,8 @@ void InsertAtTail(WaitList *lista, Process *proceso) {
 ```
 posee un nombre en inglés, pero las variables utilizadas al interior de esta están algunas en español y otras en inglés. Esto dificulta la lectura del código para un tercero pues no existe un estándar en el lenguaje natural utilizado.
 
-* ### Existe repetición de código: Como se puede ver, la función `Random` y `fcfs` poseen estructuras muy similares y hay repetición del mismo código, esto podría haber sido modelado como un método para poder reutilizarse, de forma de ordenar el código y seguir el prinipio DRY (Don't repeat yourself), lo que claramente no se utilizó en esta tarea.
+* ### Repetición de código:
+Como se puede ver, la función `Random` y `fcfs` poseen estructuras muy similares y hay repetición del mismo código, esto podría haber sido modelado como un método para poder reutilizarse, de forma de ordenar el código y seguir el prinipio DRY (Don't repeat yourself), lo que claramente no se utilizó en esta tarea.
 
 A continuación se muestra un fragmento de código que se reutiliza en ambas funciones:
 
@@ -113,7 +114,9 @@ if (cola_wait->largo != 0) {
 ```
 este trozo se ocupa desde la línea 363 en la función `fcfs` y desde la línea 512 en la función `RandomScheduler`. Con esto se añade código innecesario "ensuciando" el código y haciendolo más extenso de forma innecesaria.
 
-* ### En el archivo `Tarea1.c` existe gran cantidad de código comentado que no tiene ningún uso, solamente ensucia el código general. Esto quita claridad al leer el archivo. Además de esto no se respeta una formato a lo largo del archivo, es decir espacios después de definición de métodos o saltos de línea entre funciones lo que también quita claridad al código. Esto se puede ver a continuación
+* ### Código comentado sin utilizar:
+
+En el archivo `Tarea1.c` existe gran cantidad de código comentado que no tiene ningún uso, solamente ensucia el código general. Esto quita claridad al leer el archivo. Además de esto no se respeta una formato a lo largo del archivo, es decir espacios después de definición de métodos o saltos de línea entre funciones lo que también quita claridad al código. Esto se puede ver a continuación
 
 ```c
 if (proceso_actual->tiempo_restante == 0 && //linea 272

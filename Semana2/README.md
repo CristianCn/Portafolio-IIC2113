@@ -1,14 +1,14 @@
 # Code Smells "Pistas para detectar mal código" - Portafolio Semana 2
 
-En el siguiente portafolio se presentarán dos tipos *code smells*, los que están directamente relacionados con el curso pues se vieron algunos de ellos como indicios de que hay problemas en el código, además se analizará el llamado `Future Envy` que relaciona los principios de `cohesión` y `acomplamiento` que revisamos.
+En el siguiente portafolio se presentarán dos tipos de *code smells*, los que están directamente relacionados con el curso pues se vieron algunos de ellos como indicios de que hay problemas en el código, además, se analizará el llamado `Future Envy` que relaciona los principios de `cohesión` y `acomplamiento` que revisamos.
 
 ## ¿Qué se entiende por Code smells?
 
-[Martin Fowler](https://martinfowler.com/bliki/CodeSmell.html) en su libro "Refactoring", los define de la siguiente forma: "*A code smell is a surface indication that usually corresponds to a deeper problem in the system*", es decir, son pistas que nos llevan a pensar que el código presentado presenta errores que van más allá de una simple indicación visual de que algo anda mal por cómo está escrito el código. Para el presente porfafolio expondré como artefacto algunos CodeSmells sacados de [codinghorror.com](https://blog.codinghorror.com/code-smells/) que me parecen frecuentes ejemplificándolos con código.
+[Martin Fowler](https://martinfowler.com/bliki/CodeSmell.html) en su libro "Refactoring", los define de la siguiente forma: "*A code smell is a surface indication that usually corresponds to a deeper problem in the system*", es decir, son pistas que nos llevan a pensar que el código presentado posee errores, las que se detectan por una simple inspección pero podrían significar problemas más profundos. Para el presente porfafolio expondré como artefacto algunos CodeSmells sacados de [codinghorror.com](https://blog.codinghorror.com/code-smells/) que me parecen frecuentes y los ejemplificaré con código.
 
 ## Feature Envy:
 
-Este *Code Smell* de da cuando un método o una clase accesa más a métodos de otra clase o función que las propias. Por ejemplo se puede ver en el siguiente código java (sacado de [code smells (Java edition)](http://bit.ly/1LmVYvu):
+Este *Code Smell* de da cuando un método o una clase accesa más a métodos de otra clase o función que a las propias. Por ejemplo se puede ver en el siguiente código java (sacado de [code smells (Java edition)](http://bit.ly/1LmVYvu):
 
 ```java
 public class Phone {
@@ -36,7 +36,7 @@ public class Customer…
    }
 ```
 
-Aquí la clase `Customer` accesa a los métodos de la clase `Phone` variadas veces, siendo este su comportamiento principal, por lo tanto nos hace pensar que sería mejor tener un método `getMobilePhoneNumber` en la clase `Phone`, de lo contrario estamos violando dos principios fundamentales del diseño de software, tendríamos un alto acoplamiento y baja cohesión en la clase `Customer`.
+Aquí la clase `Customer` accesa a los métodos de la clase `Phone` variadas veces, siendo este su comportamiento principal, por lo tanto nos hace pensar que sería mejor tener un método `getMobilePhoneNumber` en la clase `Phone`, de lo contrario estamos violando dos principios fundamentales del diseño de software, tendríamos un alto acoplamiento y baja cohesión en la clase `Customer`. Podemos ver que la responsabilidad de obtener un número no tiene relación con la clase `Customer`.
 
 A este *Code smell* se evitar fácilmente haciendo el siguiente refactoring:
 
@@ -66,7 +66,7 @@ public class Customer…
    }
 ```
 
-Sin embargo, se debe tomar en cuenta de que este es un ejemplo trivial pero un refactoring de *Feature Envy* real podría ser muy complicado por la cantidad de dependencias que podría haber. En el ejemplo el *code smell* desaparece pues se la responsabilidad de armar el número telefónico se le traspasa a la clase `Phone`, la que lógicamente tendría que hacerlo.
+Sin embargo, se debe tomar en cuenta de que este es un ejemplo trivial, pero un refactoring de *Feature Envy* real podría ser muy complicado por la cantidad de dependencias que podría haber. En el ejemplo el *code smell* desaparece pues la responsabilidad de armar el número telefónico se le traspasa a la clase `Phone`, la que lógicamente tendría que haberlo echo desde un principio.
 
 ## Comments
 

@@ -1,6 +1,6 @@
 # Five Reasons Developers Don’t Use UML and Six Reasons to Use It - Portafolio Semana 3
 
-El artefacto presentado esta semana es un artículo de un blog que encontré interesante, pues da razones a favor y en contra de UML. El artículo puede ser visto en el siguiente vínculo [pros and cons of UML](https://saturnnetwork.wordpress.com/2010/10/22/five-reasons-developers-dont-use-uml-and-six-reasons-to-use-it/), pero para un entendimiento más rápido tomaré y citaré directamente algunas razones que aparecen en el artículo, por lo que no es crucial leer el documento completo desde el link.
+El artefacto presentado esta semana es un artículo de un blog que encontré interesante, pues da razones a favor y en contra de UML. El artículo puede ser visto en el siguiente vínculo: [pros and cons of UML](https://saturnnetwork.wordpress.com/2010/10/22/five-reasons-developers-dont-use-uml-and-six-reasons-to-use-it/), pero para un entendimiento más rápido tomaré y citaré directamente algunas razones que aparecen en el artículo, por lo que no es crucial leer el documento completo desde el link.
 
 ## Por qué usar UML?
 
@@ -29,7 +29,7 @@ UML is the de facto standard notation for software design. In other words, it’
 
 Me parece que esta sentencia es la mayor ventaja que tiene UML, al ser un estándar se habla siempre un mismo lenguaje al representar piezas de software, al mostrar su configuración o modelación. Esto facilita a la comunidad a mostrar de una forma universal los requisitos y funcionalidades de piezas de software en las documentaciones.
 
-**Just Need a Subset of the Notation**,
+>**Just Need a Subset of the Notation**,
 UML has 14 different types of diagrams. You won’t find anyone who uses all 14 types to document a software system. It is not a goal to try. Years ago a survey showed that in practice developers regularly use class, sequence, and use-case diagrams. The Pareto Principle seems to apply: 20% of the UML language may cover 80% of your modeling needs. That means you can learn a subset of the notation and effectively communicate your designs using UML.
 
 Creo que esto va en contra de la complejidad que existe hoy en día en UML 2.0, además de la crítica que le realizo a lo difícil que es hacer un diagrama completo siguiendo al pie de la letra los usos que se prescriben en la academia. Sin embargo, creo que es un gran punto a favor, me parece que dejar el UML como una herramienta relativamente sencilla y universal es clave para que todos tengamos un conocimiento sobre documentación y que nos permita entregar documentación clara y relativamente precisa.

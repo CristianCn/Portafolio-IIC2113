@@ -1,4 +1,4 @@
-# SOLID princicles: Single Responsability - Portafolio Semana 4
+# SOLID principles: Single Responsability - Portafolio Semana 4
 
 El artefacto presentado esta semana es un ejempo del primer principio SOLID: Single responsability. El artefacto está escrito en Python y muestra de forma ejemplificada lo que quiere decir el principio. El ejemplo se puede encontrar en el siguiente vínculo:  [principios SOLID en python](https://miguelgomez.io/python/principios-solid-python/), aquí se muestran ejemplos para todos los principios, pero solo tomaré el primer ejemplo del principio nombrado por lo que el link con el documento completo queda solamente de referencia. El artefacto está estrechamente relacionado con la materia de la semana pues vimos los principios SOLID, pero analizaré solamente uno con ejemplos creados en Python, con el que estamos más familiarizados.
 

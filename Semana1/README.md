@@ -18,7 +18,7 @@ El código presentado es una tarea que realicé con un compañero para el curso 
 
 ## ¿Por qué se escogió el código?
 
-Escogí este código pues en mi opinión es un código que tiene una calidad pobre. Al entregarlo ya estabamos al tanto de esto, pero cumplía funcionalmente el objetivo requerido para la tarea. En este código es fácil evidenciar problemas de calidad que se podrían catalogar como universalmente aceptados como: repetición de código, mal uso de nombre de variables, código comentado sin utilizar y otros que se revisarán a continuación.
+Escogí este código pues en mi opinión es un código que tiene una calidad pobre. Al entregarlo ya estabamos al tanto de esto, pero cumplía funcionalmente el objetivo requerido para la tarea. En este código es fácil evidenciar problemas de calidad que se podrían catalogar como universalmente aceptados como: repetición de código, mal uso de nombre de variables, código comentado sin utilizar y otros que se revisarán a continuación. Este artefacto tiene estrecha relación con el curso pues es un ejemplo de "código de mala calidad", en el sentido de la forma en como está escrito, por lo que sería necesario hacer refactoring sobre él si se fuese a ocupar posteriormente. En la semana vimos ideas generales de lo que es un mal código, presento este artefacto a modo de realizar un análisis crítico con contenidos de ingeniería de software, pero presentaré problemas que a mi juicio son intuitivamente indicios de "mal código" mas que indicios guiados por la literatura.
 
 
 ## Calidad de código

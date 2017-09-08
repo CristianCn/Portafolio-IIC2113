@@ -1,4 +1,4 @@
-# Code Smells "Long parameter list and " - Portafolio Semana 5
+# Code Smells "Long parameter list and Deodorant comment" - Portafolio Semana 5
 
 En el siguiente portafolio se presentarán dos tipos de *code smells*, los que están directamente relacionados con el curso pues la semana pasada vimos específicamente algunos *code smells* y su relación con los principios *SOLID*.
 

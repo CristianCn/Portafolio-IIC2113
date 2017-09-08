@@ -4,3 +4,5 @@ Repositorio usado para realizar apreciaciones de código para el curso Diseño D
 * [Semana 1](https://github.com/CristianCn/Portafolio-IIC2113/tree/master/Semana1)
 * [Semana 2](https://github.com/CristianCn/Portafolio-IIC2113/tree/master/Semana2)
 * [Semana 3](https://github.com/CristianCn/Portafolio-IIC2113/tree/master/Semana3)
+* [Semana 4](https://github.com/CristianCn/Portafolio-IIC2113/tree/master/Semana4)
+* [Semana 5](https://github.com/CristianCn/Portafolio-IIC2113/tree/master/Semana5)

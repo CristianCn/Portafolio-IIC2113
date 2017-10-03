@@ -59,7 +59,7 @@ def calc_something()
 	return c
 ```
 
-El ejemplo presentado es una exageración burda pero no está ajena a la realidad, existen muchos códigos que están comentados en forma extensa, ya que son muy difíciles de entender, debido a que los nombres de métodos y/o variables no son claros y las funciones tampoco código presentan un hilo conductor organizado.
+El ejemplo presentado es una exageración burda pero no está ajena a la realidad, existen muchos códigos que están comentados en forma extensa, ya que son muy difíciles de entender, debido a que los nombres de métodos y/o variables no son claros y las funciones tampoco presentan un hilo conductor organizado.
 
 Este *code smell* se podría evitar haciendo un refactoring como el siguiente:
 
@@ -88,4 +88,4 @@ Me parece que pequeños comentarios son útiles para otorgarle mayor claridad al
 
 ## Conclusión:
 
-Me parece que los *code smells* son un excelente indicador de que algo podría estar mal en el código principal, pero se debe tener mucho criterio al ir más allá de realizar un *refactoring* y realizar un cambio de lógica en el programa, ya que puede ser que exista un indicio de mal código pero no lo sea, o que esté justificado por lo que no es necesario modificar el programa que se está creando.
+Me parece que los *code smells* son excelentes indicadores de que algo podría estar mal en el código principal, pero se debe tener mucho criterio al ir más allá de realizar un *refactoring* y realizar un cambio de lógica en el programa, ya que puede ser que exista un indicio de mal código pero en realidad no lo sea, o que exista un *code smell* pero se justifique dentro del contexto del programa en particular. En estos casos no sería necesario modificar el programa que se está creando.
